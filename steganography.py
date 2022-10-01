@@ -24,7 +24,7 @@ def img_to_matrix(img_path):
 
 
 def matrix_to_img(matrix, img_path):
-    img = Image.fromarray(matrix, 'RGB')
+    img = Image.fromarray(matrix)
     img.save(img_path)
     img.show()
 
@@ -57,15 +57,18 @@ def hide(matrix, nums):
     m = np.copy(matrix)
     h, w, s = np.shape(matrix)
     k = 0
+    rgb = 0
     for i in range(h):
         for j in range(w):
             if k >= len(nums):
                 break
-            print(k)
-            m[i, j, 0] = nums[k]
+            # if rgb >= 3:
+            #     rgb = 0
+            m[i, j, rgb] = nums[k]
             k += 1
+            # rgb += 1
     # print_matrix(m)
     matrix_to_img(m, './new.png')
 
 
-hide(img_to_matrix("test.png"), encrypt("".join("H" for i in range(160))))
+hide(img_to_matrix("test.png"), encrypt("".join("Helloworldatestinganewstringblablabla" for i in range(3))))
